@@ -13,12 +13,13 @@ public class StudentForm {
     @NotNull(message = "Estudante não pode ser nulo")
     @Pattern(regexp = "[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", message = "O nome deve ser composto de letras")
     @Size(min = 8, max = 50, message = "Campo com no mínimo 8 caracteres e no máximo 50")
-    @Valid
     private String name;
 
-    private List<Subject> subjects;
+    @NotNull(message = "As notas não podem ser nulas")
+    @Valid
+    private List<SubjectForm> subjects;
 
-    public StudentForm(String name, List<Subject> subjects) {
+    public StudentForm(String name, List<SubjectForm> subjects) {
         this.name = name;
         this.subjects = subjects;
     }
@@ -31,11 +32,11 @@ public class StudentForm {
         this.name = name;
     }
 
-    public List<Subject> getSubjects() {
+    public List<SubjectForm> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(List<Subject> subjects) {
+    public void setSubjects(List<SubjectForm> subjects) {
         this.subjects = subjects;
     }
 }

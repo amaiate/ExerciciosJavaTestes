@@ -31,7 +31,7 @@ public class StudentConverter {
 
         return new Student(
                 studentForm.getName(),
-                studentForm.getSubjects()
+                SubjectConverter.subjectListFormEntity(studentForm.getSubjects())
         );
     }
 }

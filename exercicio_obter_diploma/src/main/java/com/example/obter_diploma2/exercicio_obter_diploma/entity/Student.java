@@ -1,5 +1,7 @@
 package com.example.obter_diploma2.exercicio_obter_diploma.entity;
 
+import com.example.obter_diploma2.exercicio_obter_diploma.form.SubjectForm;
+
 import java.util.List;
 
 public class Student {
@@ -7,6 +9,10 @@ public class Student {
     private String name;
 
     private List<Subject> subjects;
+    
+    public Student (){
+        
+    }
 
 
     public Student(String name, List<Subject> subjects)
