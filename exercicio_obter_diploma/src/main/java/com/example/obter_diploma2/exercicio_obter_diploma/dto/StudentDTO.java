@@ -9,10 +9,10 @@ public class StudentDTO {
 
     private String name;
 
-    private List<Subject> subjects;
+    private List<SubjectDTO> subjects;
 
 
-    public StudentDTO(String name, List<Subject> subjects)
+    public StudentDTO(String name, List<SubjectDTO> subjects)
     {
         this.name = name;
         this.subjects = subjects;
@@ -22,7 +22,7 @@ public class StudentDTO {
         return name;
     }
 
-    public List<Subject> getSubjects() {
+    public List<SubjectDTO> getSubjects() {
         return subjects;
     }
 

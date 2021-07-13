@@ -20,10 +20,10 @@ public class StudentConverter {
 
     }
 
-    private static StudentDTO studentEntityToDTO(Student student) {
+    public static StudentDTO studentEntityToDTO(Student student) {
         return new StudentDTO(
                student.getName(),
-               student.getSubjects()
+               SubjectConverter.subjectListEntityForDTO(student.getSubjects())
         );
     }
 
