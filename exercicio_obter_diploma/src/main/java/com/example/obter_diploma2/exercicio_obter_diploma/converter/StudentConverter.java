@@ -4,6 +4,7 @@ import com.example.obter_diploma2.exercicio_obter_diploma.dto.StudentDTO;
 import com.example.obter_diploma2.exercicio_obter_diploma.entity.Student;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class StudentConverter {
         );
     }
 
-    public static Student studentFormForEntity(StudentForm studentForm) {
+    public static Student studentFormForEntity(@Valid StudentForm studentForm) {
 
         return new Student(
                 studentForm.getName(),

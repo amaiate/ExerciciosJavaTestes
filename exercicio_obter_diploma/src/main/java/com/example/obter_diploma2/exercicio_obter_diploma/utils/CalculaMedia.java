@@ -5,7 +5,7 @@ import com.example.obter_diploma2.exercicio_obter_diploma.entity.Subject;
 
 public class CalculaMedia {
 
-    public static double averageCalc (Student student){
+    public static double calculateAverage (Student student){
 
         double mediaCalculada = 0;
         double notasTotais = 0;

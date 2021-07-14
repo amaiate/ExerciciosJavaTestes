@@ -21,7 +21,7 @@ public class DiplomaHandlerException {
         BindingResult result = e.getBindingResult();
 
         List<FieldError> fieldErrors = result.getFieldErrors();
-        ExceptionFieldDTO exceptions = FieldErrors.processFieldErrors(fieldErrors);
+        ExceptionFieldDTO exceptions = ApiExceptionControllerAdvice.processFieldErrors(fieldErrors);
 
         return ResponseEntity.badRequest().body(exceptions);
     }

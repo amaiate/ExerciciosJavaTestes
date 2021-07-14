@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FieldErrors {
+public class ApiExceptionControllerAdvice {
 
     // cria um ExceptionFieldDTO para cada atributo que viola alguma validação
     public static ExceptionFieldDTO processFieldErrors(List<FieldError> fieldErrors) {

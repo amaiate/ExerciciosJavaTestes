@@ -19,7 +19,11 @@ public class StudentForm {
     @Valid
     private List<SubjectForm> subjects;
 
-    public StudentForm(String name, List<SubjectForm> subjects) {
+
+    public StudentForm() {
+    }
+
+    public StudentForm(@Valid @NotNull(message = "Estudante não pode ser nulo") @Pattern(regexp = "[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$", message = "O nome deve ser composto de letras") @Size(min = 8, max = 50, message = "Campo com no mínimo 8 caracteres e no máximo 50") String name, @NotNull(message = "As notas não podem ser nulas") @Valid List<SubjectForm> subjects) {
         this.name = name;
         this.subjects = subjects;
     }

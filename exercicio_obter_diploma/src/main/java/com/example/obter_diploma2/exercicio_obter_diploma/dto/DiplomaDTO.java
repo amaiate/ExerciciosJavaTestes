@@ -14,6 +14,10 @@ public class DiplomaDTO {
         this.studentDTO = studentDTO;
     }
 
+    public DiplomaDTO() {
+
+    }
+
     public String getMessage() {
         return message;
     }
