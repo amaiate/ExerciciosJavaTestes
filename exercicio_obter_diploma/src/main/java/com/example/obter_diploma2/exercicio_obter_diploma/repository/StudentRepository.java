@@ -31,7 +31,7 @@ public class StudentRepository {
         return student;
     }
 
-    public DiplomaDTO calculaNotas (Student student) throws Exception {
+    public DiplomaDTO calculaNotas (Student student) {
 
         try{
         StudentDTO studentDTO = StudentConverter.studentEntityToDTO(student);
@@ -41,8 +41,8 @@ public class StudentRepository {
                 studentDTO
 
         );
-        }catch (Exception e){
-            throw new Exception();
+        }catch (StudentInvalidException e){
+            throw new StudentInvalidException("Não foi possível gerar diploma");
         }
     }
 

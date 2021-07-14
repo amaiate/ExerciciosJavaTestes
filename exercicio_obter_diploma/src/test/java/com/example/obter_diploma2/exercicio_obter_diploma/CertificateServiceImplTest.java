@@ -7,6 +7,7 @@ import com.example.obter_diploma2.exercicio_obter_diploma.entity.Student;
 import com.example.obter_diploma2.exercicio_obter_diploma.exceptions.StudentInvalidException;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.SubjectForm;
+import com.example.obter_diploma2.exercicio_obter_diploma.repository.DiplomaRepository;
 import com.example.obter_diploma2.exercicio_obter_diploma.repository.StudentRepository;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.DiplomaService;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.StudentService;
@@ -39,6 +40,8 @@ public class CertificateServiceImplTest {
     private DiplomaController diplomaController;
     @Autowired
     private  StudentRepository studentRepository;
+    @Autowired
+    private DiplomaRepository diplomaRepository;
 
 
 
@@ -117,7 +120,7 @@ public class CertificateServiceImplTest {
 
         List <SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
 
-        StudentForm s1 = new StudentForm("Adriana", subjectList);
+        StudentForm s1 = new StudentForm("Adriana Maiate ", subjectList);
 
         double media = CalculaMedia.calculateAverage(StudentConverter.studentFormForEntity(s1));
 
@@ -133,16 +136,50 @@ public class CertificateServiceImplTest {
         SubjectForm sub3 = new SubjectForm("História", 10);
         List <SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
 
-        StudentForm s1 = new StudentForm("Adriana", subjectList);
-        studentService.addStudent(s1);
+        StudentForm s1 = new StudentForm("Adriana Maiate", subjectList);
+        Student s2 = studentService.addStudent(s1);
 
         DiplomaDTO expected = diplomaService.gerarDiploma(s1);
+        diplomaRepository.addDiploma(expected);
 
-        ThrowingSupplier<DiplomaDTO> diploma = () -> this.diplomaService.gerarDiploma(s1);
+        DiplomaDTO atual = diplomaRepository.getDiploma(s2);
 
-        DiplomaDTO response = Assertions.assertDoesNotThrow(diploma);
+        Assertions.assertEquals(atual, expected);
 
-        Assertions.assertEquals(response.getStudentDTO(), expected.getStudentDTO());
+    }
+
+    @Test
+    public void Nao_Imprimindo_diploma_com_aluno_com_media_abaixo_de_6 () throws Exception {
+        SubjectForm sub1 = new SubjectForm("Matemática", 10);
+        SubjectForm sub2 = new SubjectForm("Filosofia", 5);
+        SubjectForm sub3 = new SubjectForm("História", 0);
+        List <SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
+
+        StudentForm s1 = new StudentForm("Adriana Maiate", subjectList);
+        Student s2 = studentService.addStudent(s1);
+
+
+        StudentInvalidException exception = Assertions.assertThrows(StudentInvalidException.class, () -> diplomaService.gerarDiploma(s1));
+        Assertions.assertNotNull(exception);
+
+    }
+
+    @Test
+    public void Imprimindo_diploma_com_aluno_com_media_acima_de_9_com_honra () throws Exception {
+        SubjectForm sub1 = new SubjectForm("Matemática", 10);
+        SubjectForm sub2 = new SubjectForm("Filosofia", 9);
+        SubjectForm sub3 = new SubjectForm("História", 10);
+        List <SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
+
+        StudentForm s1 = new StudentForm("Adriana Maiate", subjectList);
+        Student s2 = studentService.addStudent(s1);
+
+        DiplomaDTO expected = diplomaService.gerarDiploma(s1);
+        diplomaRepository.addDiploma(expected);
+
+        DiplomaDTO atual = diplomaRepository.getDiploma(s2);
+
+        Assertions.assertEquals(atual.getMessage().toString(), "Aprovado! Parabéns você foi muito bem!");
 
     }
 

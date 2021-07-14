@@ -1,6 +1,7 @@
 package com.example.obter_diploma2.exercicio_obter_diploma.utils;
 
 import com.example.obter_diploma2.exercicio_obter_diploma.dto.StudentDTO;
+import com.example.obter_diploma2.exercicio_obter_diploma.exceptions.StudentInvalidException;
 
 import java.text.DecimalFormat;
 
@@ -25,7 +26,7 @@ public class GerarMensagem {
         } else if (average >= 6) {
             resultado = "Aprovado";
         } else {
-            resultado = "Reprovado! Com essa média final não é possível liberar seu diploma, estude mais!";
+            throw new StudentInvalidException("Reprovado! Com essa média final não é possível liberar seu diploma, estude mais!");
         }
         return resultado;
     }

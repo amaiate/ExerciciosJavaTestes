@@ -28,7 +28,7 @@ public class StudentConverter {
         );
     }
 
-    public static Student studentFormForEntity(@Valid StudentForm studentForm) {
+    public static Student studentFormForEntity(StudentForm studentForm) {
 
         return new Student(
                 studentForm.getName(),
