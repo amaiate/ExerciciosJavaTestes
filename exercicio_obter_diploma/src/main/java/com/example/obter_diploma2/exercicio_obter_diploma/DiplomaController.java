@@ -7,6 +7,7 @@ import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.DiplomaService;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class DiplomaController {
         this.diplomaService = diplomaService;
     }
 
-    @PostMapping
+    @PostMapping("/diploma")
     public ResponseEntity<DiplomaDTO> postAluno (@RequestBody @Valid StudentForm student) throws Exception {
         studentService.addStudent(student);
         return ResponseEntity.accepted().body(diplomaService.gerarDiploma(student));
