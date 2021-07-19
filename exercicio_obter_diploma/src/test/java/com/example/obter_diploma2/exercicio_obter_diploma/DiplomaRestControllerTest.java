@@ -1,6 +1,29 @@
 package com.example.obter_diploma2.exercicio_obter_diploma;
 
 
+
+import com.example.obter_diploma2.exercicio_obter_diploma.exceptions.StudentInvalidException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import com.example.obter_diploma2.exercicio_obter_diploma.dto.DiplomaDTO;
 import com.example.obter_diploma2.exercicio_obter_diploma.entity.Student;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
@@ -19,6 +42,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.http.client.MockClientHttpResponse;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -35,6 +59,9 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -90,4 +117,29 @@ public class DiplomaRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isAccepted());
 
     }
-}
+
+
+    @Test
+    public void retorna_AlunoNãoAprovado() throws Exception {
+
+        DiplomaDTO diplomaDTO = new DiplomaDTO();
+        SubjectForm sub1 = new SubjectForm("Matemática", 10);
+        SubjectForm sub2 = new SubjectForm("Filosofia", 9);
+        SubjectForm sub3 = new SubjectForm("História", 10);
+        List<SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
+
+        StudentForm s1 = new StudentForm("Adriana Maiate", subjectList);
+        studentService.addStudent(s1);
+
+        DiplomaDTO expected = diplomaService.gerarDiploma(s1);
+        diplomaRepository.addDiploma(expected);
+
+
+        String payLoad = mapper.writeValueAsString(s1);
+        this.mock.perform(MockMvcRequestBuilders.post("/api/diploma")
+                .contentType("application/json")
+                .content("null"))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+    }
+

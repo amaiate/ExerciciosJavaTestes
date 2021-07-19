@@ -130,21 +130,19 @@ public class CertificateServiceImplTest {
     }
 
     @Test
-    public void Imprimindo_diploma_com_aluno_com_media_acima_de_9 () throws Exception {
-        SubjectForm sub1 = new SubjectForm("Matemática", 10);
-        SubjectForm sub2 = new SubjectForm("Filosofia", 8);
-        SubjectForm sub3 = new SubjectForm("História", 10);
+    public void Imprimindo_diploma_com_aluno_com_media_acima_de_7 () throws Exception {
+        SubjectForm sub1 = new SubjectForm("Matemática", 6);
+        SubjectForm sub2 = new SubjectForm("Filosofia", 6);
+        SubjectForm sub3 = new SubjectForm("História", 6);
         List <SubjectForm> subjectList = new ArrayList(Arrays.asList(new SubjectForm[]{sub1, sub2, sub3}));
 
         StudentForm s1 = new StudentForm("Adriana Maiate", subjectList);
         Student s2 = studentService.addStudent(s1);
 
-        DiplomaDTO expected = diplomaService.gerarDiploma(s1);
-        diplomaRepository.addDiploma(expected);
+        DiplomaDTO atual = diplomaService.gerarDiploma(s1);
+        diplomaRepository.addDiploma(atual);
 
-        DiplomaDTO atual = diplomaRepository.getDiploma(s2);
-
-        Assertions.assertEquals(atual, expected);
+        Assertions.assertEquals( "Aprovado", atual.getMessage());
 
     }
 
@@ -179,7 +177,7 @@ public class CertificateServiceImplTest {
 
         DiplomaDTO atual = diplomaRepository.getDiploma(s2);
 
-        Assertions.assertEquals(atual.getMessage().toString(), "Aprovado! Parabéns você foi muito bem!");
+        Assertions.assertEquals(atual.getMessage(), "Aprovado! Parabéns você foi muito bem!");
 
     }
 

@@ -22,23 +22,12 @@ public class DiplomaDTO {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public double getAvarage() {
         return avarage;
-    }
-
-    public void setAvarage(double avarage) {
-        this.avarage = avarage;
     }
 
     public StudentDTO getStudentDTO() {
         return studentDTO;
     }
 
-    public void setStudentDTO(StudentDTO studentDTO) {
-        this.studentDTO = studentDTO;
-    }
 }

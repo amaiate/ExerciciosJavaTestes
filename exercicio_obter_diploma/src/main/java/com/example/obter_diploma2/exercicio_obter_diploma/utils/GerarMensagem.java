@@ -7,16 +7,6 @@ import java.text.DecimalFormat;
 
 public class GerarMensagem {
 
-    private String mensagem = "";
-
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-
     public static String gerarMensagem(double average){
 
         String resultado = "";

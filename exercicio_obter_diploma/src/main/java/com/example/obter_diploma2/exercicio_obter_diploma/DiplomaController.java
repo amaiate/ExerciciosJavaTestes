@@ -1,13 +1,10 @@
 package com.example.obter_diploma2.exercicio_obter_diploma;
 
-import com.example.obter_diploma2.exercicio_obter_diploma.converter.StudentConverter;
 import com.example.obter_diploma2.exercicio_obter_diploma.dto.DiplomaDTO;
-import com.example.obter_diploma2.exercicio_obter_diploma.entity.Student;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.DiplomaService;
 import com.example.obter_diploma2.exercicio_obter_diploma.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
