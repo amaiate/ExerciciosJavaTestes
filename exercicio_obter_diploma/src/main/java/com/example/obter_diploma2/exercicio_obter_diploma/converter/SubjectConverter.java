@@ -1,10 +1,7 @@
 package com.example.obter_diploma2.exercicio_obter_diploma.converter;
 
-import com.example.obter_diploma2.exercicio_obter_diploma.dto.StudentDTO;
 import com.example.obter_diploma2.exercicio_obter_diploma.dto.SubjectDTO;
-import com.example.obter_diploma2.exercicio_obter_diploma.entity.Student;
 import com.example.obter_diploma2.exercicio_obter_diploma.entity.Subject;
-import com.example.obter_diploma2.exercicio_obter_diploma.form.StudentForm;
 import com.example.obter_diploma2.exercicio_obter_diploma.form.SubjectForm;
 
 import java.util.ArrayList;

@@ -1,9 +1,7 @@
 package com.example.obter_diploma2.exercicio_obter_diploma.utils;
 
-import com.example.obter_diploma2.exercicio_obter_diploma.dto.StudentDTO;
-import com.example.obter_diploma2.exercicio_obter_diploma.exceptions.StudentInvalidException;
 
-import java.text.DecimalFormat;
+import com.example.obter_diploma2.exercicio_obter_diploma.exceptions.StudentInvalidException;
 
 public class GerarMensagem {
 
@@ -21,8 +19,4 @@ public class GerarMensagem {
         return resultado;
     }
 
-    public static String arredondar(Double valor) {
-
-        return new DecimalFormat("#,##0.00").format(valor);
-    }
 }

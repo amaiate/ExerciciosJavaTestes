@@ -14,9 +14,6 @@ public class DiplomaRepository {
 
     List<DiplomaDTO> diplomas = new ArrayList<>();
 
-    public List<DiplomaDTO> getDiplomas() {
-        return diplomas;
-    }
 
     public DiplomaDTO getDiploma(Student student) {
         Optional<DiplomaDTO> diplomaDTO =  diplomas.stream().filter(s-> s.getStudentDTO().getName() == student.getName()).findFirst();

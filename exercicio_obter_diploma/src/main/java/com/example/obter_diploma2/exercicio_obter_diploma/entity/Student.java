@@ -1,7 +1,5 @@
 package com.example.obter_diploma2.exercicio_obter_diploma.entity;
 
-import com.example.obter_diploma2.exercicio_obter_diploma.form.SubjectForm;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,11 +13,6 @@ public class Student {
     private String name;
 
     private List<Subject> subjects;
-    
-    public Student (){
-        
-    }
-
 
     public Student(String name, List<Subject> subjects)
     {

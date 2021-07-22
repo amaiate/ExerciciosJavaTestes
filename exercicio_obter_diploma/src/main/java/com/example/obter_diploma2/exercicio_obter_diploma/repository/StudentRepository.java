@@ -18,9 +18,6 @@ public class StudentRepository {
 
     List<Student> students = new ArrayList<>();
 
-    public List<Student> getStudents() {
-        return students;
-    }
 
     public Student addStudent(Student student) {
        if(!validar(student)){
